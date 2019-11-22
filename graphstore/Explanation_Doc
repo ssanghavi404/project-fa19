@@ -1,0 +1,13 @@
+Explanation Doc
+
+tempG.pkl can be read with networkx.readwrite.gpickle.read_gpickle()
+	this is a graph with 100 nodes, 5 clusters
+
+dropoffnodes.pkl is an array of drop off points, i.e. a list of drop off nodes
+this can be read as:
+
+import pickle
+with open('./dropoffnodes.pkl', 'rb') as f:
+    dropoffnodes = pickle.load(f)
+    
+spatiallocations.pkl is an array of points in 2d the index, i, corresponds to the point which was used to generate node i
