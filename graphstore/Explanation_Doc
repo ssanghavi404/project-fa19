@@ -11,3 +11,5 @@ with open('./dropoffnodes.pkl', 'rb') as f:
     dropoffnodes = pickle.load(f)
     
 spatiallocations.pkl is an array of points in 2d the index, i, corresponds to the point which was used to generate node i
+
+homes.pkl is an array of home nodes the 0th element in that array is soda. i.e. [23, 19, 900], 23 is soda and 19, 900 are homes
