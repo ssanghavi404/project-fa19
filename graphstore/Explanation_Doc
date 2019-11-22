@@ -3,7 +3,7 @@ Explanation Doc
 tempG.pkl can be read with networkx.readwrite.gpickle.read_gpickle()
 	this is a graph with 100 nodes, 5 clusters
 
-dropoffnodes.pkl is an array of drop off points, i.e. a list of drop off nodes
+dropoffnodes.pkl is an array of drop off points, i.e. a list of drop off nodes. the first node is soda
 this can be read as:
 
 import pickle
