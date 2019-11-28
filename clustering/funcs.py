@@ -6,13 +6,13 @@ __all__ = ('k_cluster', )
 
 def k_cluster(G, k):
     """returns k clusters from the graph G via the method described in class:
-    
-    randomly selects a starting vertex and then places k vertices at points furthest away from all cluster centers. 
-    then assigns all remaining points to the cluster center closest to each point. 
-    
+
+    randomly selects a starting vertex and then places k vertices at points furthest away from all cluster centers.
+    then assigns all remaining points to the cluster center closest to each point.
+
     ideas for improvement:
     1. don't assign all points to clusters, choose some radius to which, if a point is that far away from a cluster center,
-        then it is assigned to that cluster otherwise none. 
+        then it is assigned to that cluster otherwise none.
     2. some metric to guess how many clusters, look at degree of clustering possibly
     """
 
@@ -37,7 +37,7 @@ def k_cluster(G, k):
 
     out = dict()
     for u in used:
-        out.update({u:[u,]})
+        out.update({u:[]})
     #now put all nodes in appropriate cluster:
     for node in G.nodes:
         l=nx.shortest_path_length(G, node, weight = 'weight')
