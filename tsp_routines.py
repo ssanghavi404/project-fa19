@@ -112,6 +112,21 @@ def construct_fully_connected_subgraph(node_subset,G):
                 sub_graph.add_edge(u,v,weight=wt)
     return sub_graph
 
+def complete_shortest_path_subgraph(G, subset):
+    """
+    return a fully connected graph with using the vertices in `subset`
+    and whose edges are weighted by the shortest path between these
+    vertices in the graph `G`
+    """
+    new_graph = nx.Graph()
+    for I in range(len(subset)-1):
+        u = subset[I]
+        for J in range(I+1,len(subset)):
+            v = subset[J]
+            dist = nx.dijkstra_path_length(G,u,v)
+            new_graph.add_edge(u,v,weight=dist)
+    return new_graph
+
 def add_specified_edges(G1,G2,edges):
     """
     copy G2[edges] into G1
