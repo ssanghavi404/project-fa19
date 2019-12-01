@@ -50,3 +50,24 @@ def k_cluster(G, k):
         out[clustercenter].append(node)
 
     return out
+
+def best_dropoff(G, subset):
+    '''best_dropoff(nx.graph, list) --> int
+    Returns the best dropoff point given a graph and a list of integers representing the homes
+    G is a networkx graph
+    Subset is list of nodes in a cluster from which we want to find the best drop-off point
+    '''
+    sum_distances = {}
+    for vertex in subset:
+        vertex_distances = nx.algorithms.shortest_paths.generic.shortest_path_length(G, source=vertex, target=None, weight='weight')
+        for key in vertex_distances:
+            sum_distances[key] = sum_distances.get(key, 0) + vertex_distances[key]
+
+    bestDist = float('inf')
+    bestNode = 0
+    for node in sum_distances:
+        if sum_distances[node] < bestDist:
+            bestDist = sum_distances[node]
+            bestNode = node
+
+    return bestNode
