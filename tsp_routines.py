@@ -99,8 +99,11 @@ def find_odd_degree_nodes(G):
 
 def construct_fully_connected_subgraph(node_subset,G):
     """
-    return a graph with `node_subset` as the nodes. The graph is fully connected and uses the same edge
-    weight as in G.
+    return a graph with `node_subset` as the nodes.
+    The graph is fully connected and uses the same edge weight as in G.
+    Inputs:
+    G - a fully connected graph with edge weights
+    node_subset - List with a subset of nodes to be used in the new graph
     """
     sub_graph = nx.Graph()
     for u in node_subset:
@@ -114,16 +117,17 @@ def construct_fully_connected_subgraph(node_subset,G):
 
 def complete_shortest_path_subgraph(G, subset):
     """
-    return a fully connected graph with using the vertices in `subset`
+    return a fully connected graph using the vertices in `subset`
     and whose edges are weighted by the shortest path between these
     vertices in the graph `G`
     """
     new_graph = nx.Graph()
+    distances = dict(nx.all_pairs_dijkstra_path_length(G))
     for I in range(len(subset)-1):
         u = subset[I]
         for J in range(I+1,len(subset)):
             v = subset[J]
-            dist = nx.dijkstra_path_length(G,u,v)
+            dist = distances[u][v]
             new_graph.add_edge(u,v,weight=dist)
     return new_graph
 
