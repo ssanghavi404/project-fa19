@@ -25,19 +25,22 @@ def drop_repeated(input_list):
             output_list.append(entry)
     return output_list
 
-def tsp_solution_to_path(G,tsp_route):
+def tsp_solution_to_path(G,tsp_route,all_pairs_shortest_paths):
     """
     converts the given tsp sequence to be followed by the car into a
     path in the graph G
     Input:
     G - undirected weighted input graph
     tsp_route - list of vertices specifying the route to be followed by the car
+    all_pairs_shortest_paths - dict such that all_pairs_shortest_paths[u][v] is the shortest
+        path from u to v
     """
     prev = tsp_route[0]
     final_path = []
     final_path.append(prev)
     for vertex in tsp_route[1:]:
-        path = nx.shortest_path(G,prev,vertex,weight='weight')
+        # path = nx.shortest_path(G,prev,vertex,weight='weight')
+        path = all_pairs_shortest_paths[prev][vertex]
         final_path += path[1:]
         prev = vertex
     return final_path
@@ -53,7 +56,7 @@ def metric_mst_tsp(G,s):
     G -- a fully connected undirected weighted graph where edge weights satisfy triangle inequality.
     s -- a vertex in G
     """
-    T = nx.minimum_spanning_tree(G)
+    T = nx.minimum_spanning_tree(G,weight='weight')
     dfs_edges = list(nx.dfs_edges(T,source=s))
     vertices = []
     for e in dfs_edges:

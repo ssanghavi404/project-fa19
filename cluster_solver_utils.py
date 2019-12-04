@@ -21,6 +21,27 @@ def eval_cost(G, path, dropoffs):
 
     return cost
 
+def eval_cost_efficient(G, path, dropoffs, all_pairs_distances):
+    '''
+    eval_cost(nx.graph, np.ndarray, dict) -> int
+    path is a iterable of integers that we follow in the car
+    dropOffs is a dictionary (int -> [home, home, ...] )
+    all_pairs_distances - shortest path distance between any pair of vertices
+    '''
+
+    cost = 0
+    prevNode = path[0]
+    for node in path[1:]:
+        cost += 2/3 * G[prevNode][node]['weight'] # weight of the edge from previous to next node
+        prevNode = node
+
+    for node in path:
+        for home in dropoffs[node]:
+            cost += all_pairs_distances[node][home]
+
+    return cost
+
+
 def nearest_dropoff(G,route,homes):
     """
     Returns a list representing the nearest dropoff point for each home
@@ -55,8 +76,10 @@ def nearest_dropoff_efficient(graph,route,homes,all_pairs_distances):
         wheredict.update({node:[]}) #initialize a dropoff at each node in route. there could be places where noone is dropped.
 
     for h in homes:
-        ls = all_pairs_distances[h]#shortest path from h to all nodes (dict)
-        ls = {k:ls[k] for k in route}
-        wheredict[min(ls, key=ls.get)].append(h)
+        dist_to_route = [all_pairs_distances[h][r] for r in route]
+        min_dist = min(dist_to_route)
+        idx = dist_to_route.index(min_dist)
+        best_dropoff = route[idx]
+        wheredict[best_dropoff].append(h)
 
     return wheredict
