@@ -225,11 +225,11 @@ def generate_all_optimal_solutions(suffix):
                 pickle.dump(outputdict, handle, protocol = pickle.HIGHEST_PROTOCOL)
 
 ################################################################
-##   EXAMPLES
+##   EXAMPLE USAGE
 ##
 ##   
 # inputfile = "inputs/170_100.in"
 # route, dropoffs = solve_inputfile(inputfile)
 # generate_all_cost_plots("50.in")
-# generate_all_optimal_solutions("100.in")
+# generate_all_optimal_solutions("50.in")
 
