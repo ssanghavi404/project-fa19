@@ -25,6 +25,23 @@ def drop_repeated(input_list):
             output_list.append(entry)
     return output_list
 
+def tsp_solution_to_path(G,tsp_route):
+    """
+    converts the given tsp sequence to be followed by the car into a
+    path in the graph G
+    Input:
+    G - undirected weighted input graph
+    tsp_route - list of vertices specifying the route to be followed by the car
+    """
+    prev = tsp_route[0]
+    final_path = []
+    final_path.append(prev)
+    for vertex in tsp_route[1:]:
+        path = nx.shortest_path(G,prev,vertex,weight='weight')
+        final_path += path[1:]
+        prev = vertex
+    return final_path
+
 #################################################################################
 # TSP approximation algorithm via minimum spanning trees
 def metric_mst_tsp(G,s):
@@ -126,6 +143,26 @@ def complete_shortest_path_subgraph(G, subset):
     for I in range(len(subset)-1):
         u = subset[I]
         for J in range(I+1,len(subset)):
+            v = subset[J]
+            dist = distances[u][v]
+            new_graph.add_edge(u,v,weight=dist)
+    return new_graph
+
+def complete_shortest_path_subgraph_efficient(graph,subset,distances):
+    """
+    return a fully connected graph using the vertices in `subset`
+    and whose edges are weighted by the shortest path between these
+    vertices in the graph `G`
+    Inputs:
+    graph - input graph
+    subset - list of vertices to be used for the subgraph
+    distances - dictionary such that distances[v1][v2] is the length of shortest path from
+        v1 to v2
+    """
+    new_graph = nx.Graph()
+    for I in range(len(subset)):
+        u = subset[I]
+        for J in range(I,len(subset)):
             v = subset[J]
             dist = distances[u][v]
             new_graph.add_edge(u,v,weight=dist)
