@@ -101,7 +101,7 @@ def min_weight_matching(G):
     Every node appears only once in a matching.
     """
     modified_graph = transform_graph_for_max_matching(G)
-    min_matching = nx.max_weight_matching(modified_graph)
+    min_matching = nx.max_weight_matching(modified_graph, maxcardinality = True)
     return min_matching
 
 def find_odd_degree_nodes(G):
@@ -198,16 +198,19 @@ def metric_christofides_tsp(G,s):
     G -- a fully connected undirected weighted graph where edge weights satisfy triangle inequality.
     s -- a vertex in G
     """
-    tree = nx.minimum_spanning_tree(G)
-    odd_nodes = find_odd_degree_nodes(tree)
-    sub_graph = construct_fully_connected_subgraph(odd_nodes,G)
-    min_matching_edges = min_weight_matching(sub_graph)
-    eulerian_graph = construct_eulerian_multigraph(tree,G,min_matching_edges)
-    circuit = nx.eulerian_circuit(eulerian_graph,s)
-    vertices = []
-    for edge in circuit:
-        vertices.append(edge[0])
-        vertices.append(edge[1])
-    christofides_tsp = drop_repeated(vertices)
-    christofides_tsp.append(s)
-    return christofides_tsp
+    if G.number_of_nodes() == 1:
+        return [s]
+    else:
+        tree = nx.minimum_spanning_tree(G)
+        odd_nodes = find_odd_degree_nodes(tree)
+        sub_graph = construct_fully_connected_subgraph(odd_nodes,G)
+        min_matching_edges = min_weight_matching(sub_graph)
+        eulerian_graph = construct_eulerian_multigraph(tree,G,min_matching_edges)
+        circuit = nx.eulerian_circuit(eulerian_graph,s)
+        vertices = []
+        for edge in circuit:
+            vertices.append(edge[0])
+            vertices.append(edge[1])
+        christofides_tsp = drop_repeated(vertices)
+        christofides_tsp.append(s)
+        return christofides_tsp
