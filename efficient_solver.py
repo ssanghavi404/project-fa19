@@ -265,37 +265,5 @@ def generate_all_optimal_costs(suffix,outfile_name):
     df.to_csv(outfile, index = False)
 
 
-generate_all_optimal_costs("50.in", "optimal_cost")
 
-
-# inputfile = "inputs/197_50.in"
-# graph,source,homes,indexToLoc = graph_file_io.graph_from_input(inputfile)
-
-# # optimal_route(graph,homes,source)
-
-# number_of_homes = len(homes)
-# all_pairs_distances = dict(nx.shortest_path_length(graph, weight = 'weight'))
-# all_pairs_shortest_paths = dict(nx.shortest_path(graph, weight = 'weight'))
-# homes_subgraph = tsp_routines.complete_shortest_path_subgraph_efficient(graph,homes,all_pairs_distances)
-# num_clusters_to_clustering = clustering_routines.all_k_clusters(homes_subgraph,number_of_homes)
-
-# for num_clusters in range(1,number_of_homes+1):
-#     print("# Clusters = ", num_clusters)
-#     home_clusters = num_clusters_to_clustering[num_clusters]
-#     add_vertex_to_clusters(home_clusters,source)
-#     dropoff_vertices = get_dropoff_vertices_efficient(graph, home_clusters, all_pairs_distances)
-#     dropoff_vertices.append(source)
-#     dropoff_vertices = list(set(dropoff_vertices))
-#     dropoff_subgraph = tsp_routines.complete_shortest_path_subgraph_efficient(graph,dropoff_vertices,all_pairs_distances)
-
-#     # christofides_tsp_route = tsp_routines.metric_christofides_tsp(dropoff_subgraph,source)
-
-#     if dropoff_subgraph.number_of_nodes() > 1:
-#         tree = nx.minimum_spanning_tree(dropoff_subgraph)
-#         odd_nodes = tsp_routines.find_odd_degree_nodes(tree)
-#         sub_graph = tsp_routines.construct_fully_connected_subgraph(odd_nodes,dropoff_subgraph)
-#         min_matching_edges = tsp_routines.min_weight_matching(sub_graph)
-#         eulerian_graph = tsp_routines.construct_eulerian_multigraph(tree,dropoff_subgraph,min_matching_edges)
-#         if not nx.is_eulerian(eulerian_graph):
-#             break
-    # circuit = nx.eulerian_circuit(eulerian_graph,s)
+generate_all_optimal_solutions("100.in")
