@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import os
 import pickle
+import pandas as pd
 
 def add_vertex_to_clusters(clusters,vertex):
     """
@@ -35,7 +36,8 @@ def get_dropoff_vertices_efficient(G, clusters, all_pairs_distances):
         best_dropoffs.append(dropoff)
     return best_dropoffs
 
-def get_car_path(graph,home_clusters,source,all_pairs_distances,all_pairs_shortest_paths):
+def get_car_path(graph,home_clusters,source,all_pairs_distances,all_pairs_shortest_paths,
+    source_in_clusters = False, christofides = False):
     """
     return the path to be followed by the car that visits the best dropoffs for each cluster of homes
     Inputs:
@@ -46,7 +48,10 @@ def get_car_path(graph,home_clusters,source,all_pairs_distances,all_pairs_shorte
     all_pairs_distances - shortest path distance between any pair of vertices
     all_pairs_shortest_paths - shortest path between any pair of vertices 
     """
-    add_vertex_to_clusters(home_clusters,source)
+    
+    if source_in_clusters:
+        add_vertex_to_clusters(home_clusters,source)
+
     dropoff_vertices = get_dropoff_vertices_efficient(graph, home_clusters, all_pairs_distances)
 
     # Add the source to the dropoff vertices
@@ -56,7 +61,12 @@ def get_car_path(graph,home_clusters,source,all_pairs_distances,all_pairs_shorte
     # Construct the fully connected sub-graph with the dropoff vertices
     # on which TSP is computed
     dropoff_subgraph = tsp_routines.complete_shortest_path_subgraph_efficient(graph,dropoff_vertices,all_pairs_distances)
-    tsp_route = tsp_routines.metric_mst_tsp(dropoff_subgraph,source)
+    
+    if christofides:
+        tsp_route = tsp_routines.metric_christofides_tsp(dropoff_subgraph,source)
+    else:
+        tsp_route = tsp_routines.metric_mst_tsp(dropoff_subgraph,source)
+
     final_path = tsp_routines.tsp_solution_to_path(graph,tsp_route,all_pairs_shortest_paths)
     return final_path
 
@@ -72,10 +82,17 @@ def solver(graph,homes,source,home_clusters,all_pairs_distances,all_pairs_shorte
     all_pairs_distances - shortest path distance between any pair of vertices
     all_pairs_shortest_paths - shortest path between any pair of vertices
     """
-    car_path = get_car_path(graph,home_clusters,source,all_pairs_distances,all_pairs_shortest_paths)
-    dropoffs = cluster_solver_utils.nearest_dropoff_efficient(graph,car_path,homes,all_pairs_distances)
-    cost = cluster_solver_utils.eval_cost_efficient(graph,car_path,dropoffs,all_pairs_distances)
-    return cost, dropoffs, car_path
+
+    car_path = [get_car_path(graph,home_clusters,source,all_pairs_distances,all_pairs_shortest_paths, 
+            source_in_clusters = B1, christofides = B2) for B1 in [False,True] for B2 in [False,True]]
+
+    dropoffs = [cluster_solver_utils.nearest_dropoff_efficient(graph,path,homes,all_pairs_distances) for path in car_path]
+    cost = [cluster_solver_utils.eval_cost_efficient(graph,car_path[i],dropoffs[i],all_pairs_distances) for i in range(len(car_path))]
+
+    minimum_cost = min(cost)
+    idx = cost.index(minimum_cost)
+
+    return minimum_cost, dropoffs[idx], car_path[idx]
 
 
 def optimal_route(graph,homes,source):
@@ -224,12 +241,61 @@ def generate_all_optimal_solutions(suffix):
             with open(outputfile, "wb") as handle:
                 pickle.dump(outputdict, handle, protocol = pickle.HIGHEST_PROTOCOL)
 
-################################################################
-##   EXAMPLE USAGE
-##
-##   
-# inputfile = "inputs/170_100.in"
-# route, dropoffs = solve_inputfile(inputfile)
-# generate_all_cost_plots("50.in")
-# generate_all_optimal_solutions("50.in")
+def generate_all_optimal_costs(suffix,outfile_name):
+    directory_name = "inputs/"
+    directory = os.fsencode(directory_name)
+    outfolder = "costs/" + "/" + suffix.strip(".in") + "/"
+    cost_list = []
+    input_list = []
+    try:
+        os.makedirs(outfolder)
+    except FileExistsError:
+        pass
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(suffix):
+            print("Solving : ", filename)
+            inputfile = directory_name + filename
+            graph,source,homes,indexToLoc = graph_file_io.graph_from_input(inputfile)            
+            cost, dropoffs, route, num_clusters = optimal_route(graph,homes,source)
+            cost_list.append(cost)
+            input_list.append(filename.strip(".in"))
+    df = pd.DataFrame.from_dict({"input" : input_list, "cost" : cost_list})
+    outfile = outfolder + outfile_name + ".csv"
+    df.to_csv(outfile, index = False)
 
+
+generate_all_optimal_costs("50.in", "optimal_cost")
+
+
+# inputfile = "inputs/197_50.in"
+# graph,source,homes,indexToLoc = graph_file_io.graph_from_input(inputfile)
+
+# # optimal_route(graph,homes,source)
+
+# number_of_homes = len(homes)
+# all_pairs_distances = dict(nx.shortest_path_length(graph, weight = 'weight'))
+# all_pairs_shortest_paths = dict(nx.shortest_path(graph, weight = 'weight'))
+# homes_subgraph = tsp_routines.complete_shortest_path_subgraph_efficient(graph,homes,all_pairs_distances)
+# num_clusters_to_clustering = clustering_routines.all_k_clusters(homes_subgraph,number_of_homes)
+
+# for num_clusters in range(1,number_of_homes+1):
+#     print("# Clusters = ", num_clusters)
+#     home_clusters = num_clusters_to_clustering[num_clusters]
+#     add_vertex_to_clusters(home_clusters,source)
+#     dropoff_vertices = get_dropoff_vertices_efficient(graph, home_clusters, all_pairs_distances)
+#     dropoff_vertices.append(source)
+#     dropoff_vertices = list(set(dropoff_vertices))
+#     dropoff_subgraph = tsp_routines.complete_shortest_path_subgraph_efficient(graph,dropoff_vertices,all_pairs_distances)
+
+#     # christofides_tsp_route = tsp_routines.metric_christofides_tsp(dropoff_subgraph,source)
+
+#     if dropoff_subgraph.number_of_nodes() > 1:
+#         tree = nx.minimum_spanning_tree(dropoff_subgraph)
+#         odd_nodes = tsp_routines.find_odd_degree_nodes(tree)
+#         sub_graph = tsp_routines.construct_fully_connected_subgraph(odd_nodes,dropoff_subgraph)
+#         min_matching_edges = tsp_routines.min_weight_matching(sub_graph)
+#         eulerian_graph = tsp_routines.construct_eulerian_multigraph(tree,dropoff_subgraph,min_matching_edges)
+#         if not nx.is_eulerian(eulerian_graph):
+#             break
+    # circuit = nx.eulerian_circuit(eulerian_graph,s)
