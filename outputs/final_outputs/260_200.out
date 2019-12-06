@@ -1,68 +1,102 @@
-Hayward Shreveport Hartford NorthLasVegas SterlingHeights Champaign Charlotte Lubbock Orem Nashua Tyler Arvada Scranton StPaul CathedralCity StPaul Milwaukee Gastonia CapeCoral PalmBay VeroBeach PembrokePines Layton Marysville Stamford VeroBeach SantaClara Fullerton Duluth SaintPaul Duluth Detroit Duluth Spartanburg Springfield SterlingHeights Escondido Monroe NewYork Kalamazoo NewYork Bryan HavredeGrace Bryan Birmingham Barnstable Youngstown OverlandPark Anchorage OverlandPark Greenville OverlandPark Carrollton SiouxFalls RichmondCounty Torrance Brighton Torrance Albuquerque Torrance Brighton Henderson NewYorkCity Omaha Brownsville SanBuenaventura Anaheim SanBuenaventura Hemet Mobile SanBernardino Pueblo PortSaintLucie ThousandOaks Huntsville Kissimmee Marina NewportNews Cincinnati NewYorkCity York Reno Lafayette GreenBay Lafayette Waterbury Fitchburg SterlingHeights Boston Deltona Salem Poughkeepsie Elkhart Modesto Hartford Shreveport Hayward 
-66
-Hartford Hartford 
-NorthLasVegas NorthLasVegas 
+Hayward Shreveport Reno Ogden Reno York Champaign Charlotte Champaign York NewYorkCity Henderson Topeka Downey Burlington Downey Salem Hampton Newark Hampton Salem Deltona Tucson NewYork Monroe Escondido Sacramento StLouis Sacramento Escondido Mesquite Escondido Independence RoundLakeBeach Lorain Scottsdale Omaha NewYorkCity Henderson Vancouver GrandRapids SaintPaul Duluth Detroit Duluth Fullerton Plano Greenville OverlandPark Trenton Louisville Trenton Flint Fullerton SantaClara Aberdeen SimiValley NewportNews Bethlehem Orem NewBedford McAllen Elkhart Modesto Worcester Seaside CapeCoral Bloomington CapeCoral Huntsville ThousandOaks PortSaintLucie Olympia PortSaintLucie ThousandOaks Huntsville Kissimmee Marina Frederick Marina Hialeah Albuquerque Torrance Melbourne Lubbock Bryan Birmingham Bryan NewYork Kalamazoo RoundLakeBeach Independence Cincinnati NewportNews Marina PortArthur RichmondCounty SiouxFalls Carrollton Visalia Columbus Anaheim Eugene Boise Eugene Anaheim SanBuenaventura Norwich Utica Anchorage Fresno SouthBend Bakersfield SouthBend Youngstown Barnstable Youngstown Pueblo SanBernardino PembrokePines Racine SantaClarita Newburgh Waterbury Lafayette GreenBay Laredo Gastonia Hampton ElPaso SanAntonio JohnsonCity HavredeGrace PuntaGorda Hemet Mobile Hemet SanBuenaventura Oxnard SanBuenaventura Murrieta Lacey Savannah StPaul CathedralCity StPaul CorpusChristi PalmBay Hagerstown Youngstown OverlandPark Stamford Marysville Layton Marysville Stamford LasVegas Nashua Tyler Arvada Scranton Sarasota HuntingtonBeach LakeCharles Spartanburg Springfield Harlingen Springfield SterlingHeights NorthLasVegas Hartford Shreveport Hayward 
+100
+Ogden Ogden 
+York York 
 Champaign Champaign 
 Charlotte Charlotte 
+NewYorkCity NewYorkCity 
+Henderson Henderson 
+Topeka Topeka 
+Downey Downey 
+Burlington Burlington 
+Salem Salem 
+Newark Newark 
+Deltona Deltona 
+Tucson Tucson 
+Monroe Monroe 
+StLouis StLouis 
+Mesquite Mesquite 
+RoundLakeBeach RoundLakeBeach 
+Scottsdale Scottsdale 
+Omaha Omaha 
+Vancouver Vancouver 
+GrandRapids GrandRapids 
+SaintPaul SaintPaul 
+Duluth Duluth 
+Detroit Detroit 
+Fullerton Fullerton 
+Plano Plano 
+Greenville Greenville 
+OverlandPark OverlandPark 
+Louisville Louisville 
+Flint Flint 
+SantaClara SantaClara 
+Aberdeen Aberdeen 
+NewportNews NewportNews 
+Bethlehem Bethlehem 
+NewBedford NewBedford 
+McAllen McAllen 
+Elkhart Elkhart 
+Modesto Modesto 
+CapeCoral CapeCoral 
+Bloomington Bloomington 
+Huntsville Huntsville 
+ThousandOaks ThousandOaks 
+Olympia Olympia 
+Kissimmee Kissimmee 
+Marina Marina 
+Frederick Frederick 
+Hialeah Hialeah 
+Albuquerque Albuquerque 
+Torrance Torrance 
+Melbourne Melbourne 
 Lubbock Lubbock 
-Orem Bethlehem NewBedford 
+Birmingham Birmingham 
+Kalamazoo Kalamazoo 
+Cincinnati Cincinnati 
+RichmondCounty RichmondCounty 
+SiouxFalls SiouxFalls 
+Columbus Columbus 
+Anaheim Anaheim 
+Eugene Eugene 
+Boise Boise 
+SanBuenaventura SanBuenaventura 
+Norwich Norwich 
+Utica Utica 
+Anchorage Anchorage 
+Fresno Fresno 
+Bakersfield Bakersfield 
+Barnstable Barnstable 
+Pueblo Pueblo 
+Racine Racine 
+Newburgh Newburgh 
+Waterbury Waterbury 
+GreenBay GreenBay 
+Laredo Laredo 
+ElPaso ElPaso 
+JohnsonCity JohnsonCity 
+HavredeGrace HavredeGrace 
+PuntaGorda PuntaGorda 
+Hemet Hemet 
+Mobile Mobile 
+Oxnard Oxnard 
+Lacey Lacey 
+Savannah Savannah 
+CathedralCity CathedralCity 
+CorpusChristi CorpusChristi 
+PalmBay PalmBay 
+Hagerstown Hagerstown 
+Stamford Stamford 
+Marysville Marysville 
+Layton Layton 
+LasVegas LasVegas 
 Nashua Nashua 
 Tyler Tyler 
 Arvada Arvada 
-Scranton Scranton HuntingtonBeach 
-StPaul CorpusChristi Savannah 
-CathedralCity CathedralCity 
-Gastonia Laredo Newark 
-CapeCoral CapeCoral Bloomington 
-PalmBay PalmBay 
-PembrokePines Racine 
-Layton Layton 
-Marysville Boise Marysville 
-Stamford LasVegas Stamford 
-SantaClara SantaClara 
-Fullerton Flint Fullerton Plano 
-Duluth Duluth 
-SaintPaul GrandRapids ElPaso SaintPaul 
-Detroit Detroit 
-Spartanburg LakeCharles Spartanburg 
-Springfield Harlingen 
-Escondido RoundLakeBeach Mesquite StLouis 
-Monroe Monroe 
-NewYork Tucson 
-Kalamazoo Kalamazoo 
-HavredeGrace JohnsonCity HavredeGrace Burlington 
-Birmingham Birmingham 
-Barnstable Barnstable 
-Youngstown Hagerstown Bakersfield 
-OverlandPark OverlandPark Louisville 
-Anchorage Utica Anchorage Fresno 
-Greenville Greenville 
-SiouxFalls SiouxFalls 
-RichmondCounty RichmondCounty Lacey 
-Torrance Torrance Melbourne 
-Brighton Oxnard 
-Albuquerque Albuquerque Hialeah 
-Henderson Topeka Henderson 
-NewYorkCity NewYorkCity 
-Omaha Omaha Scottsdale 
-SanBuenaventura Norwich SanBuenaventura 
-Anaheim Eugene Columbus Anaheim 
-Hemet PuntaGorda Hemet 
-Mobile Mobile 
-Pueblo Pueblo 
-PortSaintLucie Olympia 
-ThousandOaks ThousandOaks 
-Huntsville Huntsville 
-Kissimmee Kissimmee 
-Marina Marina Frederick 
-NewportNews NewportNews Aberdeen 
-Cincinnati Cincinnati 
-York York 
-Reno Ogden 
-GreenBay GreenBay 
-Waterbury Newburgh Waterbury 
-Boston Vancouver 
-Deltona Deltona 
-Salem Salem Downey 
-Elkhart McAllen Elkhart 
-Modesto Modesto 
+Scranton Scranton 
+HuntingtonBeach HuntingtonBeach 
+LakeCharles LakeCharles 
+Spartanburg Spartanburg 
+Harlingen Harlingen 
+NorthLasVegas NorthLasVegas 
+Hartford Hartford 
